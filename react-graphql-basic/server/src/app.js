@@ -1,13 +1,13 @@
 import express from 'express';
-import Morgan from 'morgan'
+import morgan  from 'morgan'
 import { graphqlHTTP} from 'express-graphql';
-import { schema,root } from './schema/mySchema';
+import { BookSchema } from './schema/bookSchema';
 const app = express();
-app.use(Morgan('dev'));
-app.use('/graphql', graphqlHTTP((request) => {
+app.use(morgan ('dev'));
+app.use('/gql', graphqlHTTP((request) => {
   return {
-    schema: schema,
-    rootValue: root,
+    schema: BookSchema,
+    
     graphiql: true,
   };
 }));
