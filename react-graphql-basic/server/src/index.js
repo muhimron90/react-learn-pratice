@@ -1,3 +1,6 @@
+require('dotenv').config();
+require('core-js/stable');
+require('regenerator-runtime/runtime');
 require('@babel/register')({
   ignore: [/regex/],
   only: [/src/, '../src/'],
