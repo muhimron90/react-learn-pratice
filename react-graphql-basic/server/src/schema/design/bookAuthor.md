@@ -1,15 +1,4 @@
-```plantuml
-
-@startuml
-header
-<font color=green><b> Many/or one book has one author</b></font>
-endheader
-
-    Book }|---|| Author
-
-@enduml
-
-```
+![Image](./book-author.png)
 
 why many books is only have one author?
 but dont you ever think these book in general paradigm.
