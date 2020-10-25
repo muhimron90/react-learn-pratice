@@ -1,7 +1,7 @@
 ##### Installing Package
 
 ```
-npm run || yarn install:modules
+yarn install:modules
 ```
 
 ---
@@ -10,7 +10,7 @@ npm run || yarn install:modules
 
 ```
 - [Root Directory]
-npm run || yarn start
+yarn start
 ```
 
 TechStack :
