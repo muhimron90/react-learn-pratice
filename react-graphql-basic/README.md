@@ -1,7 +1,7 @@
-##### Move to projectDirectory [server] && [web-spa]
+##### Installing Package
 
 ```
-npm run || yarn install
+npm run || yarn install:modules
 ```
 
 ---
@@ -9,11 +9,8 @@ npm run || yarn install
 ##### Test Drive
 
 ```
-- [dir Web-Spa]
+- [Root Directory]
 npm run || yarn start
-
-- [dir Server]
-npm run || yarn dev
 ```
 
 TechStack :

@@ -1,16 +1,20 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "server backend",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
+    "start": "nodemon dist/index.js",
+    "build": "babel src -d dist",
+    "serve": "yarn build && node dist/index.js",
+    "babel-node": "nodemon --exec babel-node src/index.js",
     "clean": "rimraf dist/",
     "clean-node": "rimraf node_modules/ && yarn ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Muhamad Imron",
   "license": "ISC",
   "dependencies": {
     "@babel/register": "^7.12.1",
@@ -26,7 +30,9 @@
     "redis": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
     "@babel/plugin-transform-arrow-functions": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "babel-plugin-lodash": "^3.3.4",

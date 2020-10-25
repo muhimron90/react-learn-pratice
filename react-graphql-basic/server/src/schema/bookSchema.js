@@ -76,7 +76,7 @@ const RootQuery = new GraphQLObjectType({
         //return books; //you can use _.foreEach or _.map
         //mongo find is queries All data with empty object
         // try Caching w/ redis
-        const cacheBookList = await GET_CACHE('key-books');
+        const cacheBookList = await GET_CACHE('key-booklist');
         if (cacheBookList) {
           console.log('Cache Used at', cacheBookList);
           return JSON.parse(cacheBookList);

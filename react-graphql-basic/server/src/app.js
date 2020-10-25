@@ -1,7 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-
 import { graphqlHTTP } from 'express-graphql';
 import { BookSchema } from './schema/bookSchema';
 import  { DatabaseCon }  from './db/connectDb';
@@ -10,7 +9,7 @@ import  { DatabaseCon }  from './db/connectDb';
 
 
 const app = express();
-
+const PORT = process.env.PORT || 4000;
 
 
 
@@ -33,6 +32,6 @@ app.use(
 
 
 
-app.listen(3030, () => { 
-    console.log('server running well');
-  });
+app.listen(PORT, () => {
+  console.log('server running well on', PORT);
+});
