@@ -5,21 +5,24 @@ import {
   ApolloProvider,
   
 } from '@apollo/client';
-import Lists from './components/Lists';
+import BookLists from './views/Book/BookList';
+import FindAuthor from './views/Book/AddBook';
 
 const cache = new InMemoryCache();
 
 
 function App() {
   const client = new ApolloClient({
-   uri: '/gqli',
+    uri: '/gqli',
     cache: cache,
+   
   });
   return (
     <ApolloProvider client={client}>
       <div id='App'>
         <h1 className='title'>Hellow Javascript !== $</h1>
-        <Lists />
+        <BookLists />
+        <FindAuthor />
       </div>
     </ApolloProvider>
   );
