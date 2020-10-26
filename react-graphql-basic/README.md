@@ -22,7 +22,7 @@ TechStack :
 - [x] ApolloClient
 - [x] React-CRA
 - [x] Redis - [Download Redis For Windows](https://www.memurai.com/) || [with Docker](https://hub.docker.com/_/redis/)
-- [ ] .....and less more
+- [ ] ......and less more
 
 ##### Why Redis for cache?
 
