@@ -1,10 +1,10 @@
 
 "use strict";
 const React = require("react");
-const { Text, Box } = require("ink");
+const { render , Text, Box } = require("ink");
 const chalk = require('chalk');
 const figlet = require("figlet");
-const Title = ({headerTitle}) => {
+const Title = ({ headerTitle }) => {
 	function fig(args) {
 		figlet(
 			args,
@@ -31,5 +31,5 @@ const Title = ({headerTitle}) => {
 		</Box>
 	);
 };
-
 module.exports = Title;
+

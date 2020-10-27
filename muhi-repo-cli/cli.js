@@ -12,14 +12,17 @@ const cli = meow(`
 	  $ muhi-repo-cli
 
 	Options
-		--name, -n  Your name
-		--fullname, -fl Your fullname
-		--git , -gh
-	Examples
-	  $ muhi-repo-cli --name=Jane
-		Hello, Jane
-
+	--git , -gh 
+	{
+		flags : {
+			github:{
+				type : 'boolean',
+				alias: 'gh'
+			}
+		}
+	}	
+	
 
 `);
 
-render(React.createElement(ui, cli.flags));
+render(React.createElement(ui,cli.input[0], cli.flags));
