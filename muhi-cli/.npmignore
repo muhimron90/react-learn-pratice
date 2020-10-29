@@ -1,0 +1,7 @@
+..node_modules/
+catata.txt
+src/
+src
+
+.env.contoh
+.gitignore

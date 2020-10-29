@@ -20,6 +20,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
+    "inlineSourceMap": false,
+    "inlineSources": true,
+    "declaration": false,
     "baseUrl": "."
   },
   "exclude": ["node_modules"],
