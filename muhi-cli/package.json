@@ -51,5 +51,8 @@
   "bugs": {
     "url": "https://github.com/muhimron90/react-learn-pratice/issues"
   },
-  "homepage": "https://github.com/muhimron90/react-learn-pratice.git"
+  "homepage": "https://github.com/muhimron90/react-learn-pratice.git",
+  "publishConfig": {
+    "access": "public"
+  }
 }

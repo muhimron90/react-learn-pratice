@@ -14,10 +14,10 @@ function GitCheck() {
     exit();
   }
 }
-// async function ClearScreen(delay: number) {
+// async function Clear(delay: number) {
 //   function FullClear() {
 //     // process.stdout.write('\x1b[2J');
-//     exec('clear ');
+//
 //   }
 //   // function Clear() {
 //   //   process.stdout.write('\x1b[0f');
