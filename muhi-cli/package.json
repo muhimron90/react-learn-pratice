@@ -2,9 +2,9 @@
   "name": "muhi-cli",
   "version": "1.0.0",
   "description": "Command Line Repo react-learn-practice ",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "bin": {
-    "muhi-cli": "dist/index.js"
+    "muhi-cli": "dist/src/index.js"
   },
   "files": [
     "dist/",
@@ -12,7 +12,7 @@
     "README.MD"
   ],
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./dist/src/index.js",
     "./package": "./package.json",
     "./package.json": "./package.json"
   },
@@ -20,7 +20,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "dev": "ts-node src/index.ts",
     "build": "tsc --build tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -51,5 +51,8 @@
   "bugs": {
     "url": "https://github.com/muhimron90/react-learn-pratice/issues"
   },
-  "homepage": "https://github.com/muhimron90/react-learn-pratice.git"
+  "homepage": "https://github.com/muhimron90/react-learn-pratice.git",
+  "publishConfig": {
+    "access": "public"
+  }
 }
