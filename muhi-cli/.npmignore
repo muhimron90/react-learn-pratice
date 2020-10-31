@@ -1,7 +1,6 @@
-..node_modules/
+node_modules/
 catata.txt
 src/
-src
-assets
-.env.contoh
-.gitignore
+assets/
+FolderTemp/
+tsconfig.json
