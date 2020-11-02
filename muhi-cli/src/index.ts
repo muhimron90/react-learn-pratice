@@ -1,11 +1,8 @@
-#!/usr/bin/env node
 import inquirer from 'inquirer';
 import { getFetchData } from './repo/getData';
 import { Errors, ErrSys, Info, Log, usrInfo } from './Color';
 import { ask } from './inquirer/Question';
 import { Build, GitCheck } from './commands/build';
-
-// import { currentDir, dirExists } from './util/directory';
 
 type T = void | any;
 
@@ -26,7 +23,7 @@ async function Main(): Promise<T> {
     const answer = await inquirer.prompt(ask(DataArray));
     let myAnswer: string = Object.values(answer).toString();
     Build('FolderTemp');
-    Log('\nChoices : ');
+    Log('\nMyChoices : ');
     Info(myAnswer);
   }
 

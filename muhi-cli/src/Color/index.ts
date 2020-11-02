@@ -27,7 +27,7 @@ const ErrSys = (msg: string) => {
 };
 const usrInfo = () => {
   log(chalk`
-  {bold {red W} {green E} {yellow L} {blue C} {magenta O} {cyan M} {greenBright E}}, Gorgeous Friends of mine {cyan.bold ${usr}}.
+  {greenBright.bold {bold Hello}}, My Gorgeous Friend - {cyan.bold ${usr}}.
   Running on [{yellow.italic ${pl}}-{yellow.italic ${arc}}]   
   `);
   log(

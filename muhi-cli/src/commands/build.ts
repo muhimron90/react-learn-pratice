@@ -1,6 +1,8 @@
-import { which, echo, exit, mkdir, cd, exec } from 'shelljs';
-import { currentDir, dirExists } from '../util/directory';
-import { Info, Log, Warning } from '../Color';
+import { which, echo, exit, pwd } from 'shelljs';
+import listr from 'listr';
+import { ErrSys, Log, Warning } from '../Color';
+import { ChangeDir, MakeDir } from './dir-tasks';
+import { spinner } from '../internals/spinner';
 
 function GitCheck() {
   if (!which('git')) {
@@ -14,50 +16,49 @@ function GitCheck() {
     exit();
   }
 }
-// async function Clear(delay: number) {
-//   function FullClear() {
-//     // process.stdout.write('\x1b[2J');
-//
-//   }
-//   // function Clear() {
-//   //   process.stdout.write('\x1b[0f');
-//   // }
-//   try {
-//     setTimeout(async () => {
-//       FullClear();
-//     }, delay * 1000);
-//   } catch (error) {
-//     console.log(error);
-//     process.exit();
-//   }
-// }
-async function makeDir(_name: string) {
-  currentDir();
-  try {
-    if (_name === '' || undefined) {
-      echo('missing name directory');
-    }
-    echo(_name);
-    echo(`Checking Directory : ${_name}`);
-    if (dirExists(_name)) {
-      setTimeout(() => {
-        Log(`Directory ${_name} \u2714 [Passed]`);
-        Info('\n -------------');
-      }, 2000);
-    } else {
-      mkdir(_name);
-      setTimeout(() => {
-        Log(`Success Create Directory \u2714 ${_name}`);
-      }, 2000);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
+
 async function Build(nameDir: string) {
-  makeDir(nameDir).then(() => {
-    cd(nameDir);
-    exec('touch suksesbro.txt');
-  });
+  const RunTask = new listr([
+    {
+      title: 'Creating Directory',
+      task: async (ctx, task) => {
+        await MakeDir(nameDir)
+          .then((res) => {
+            setTimeout(() => {
+              // Log(`in  ${res} \u2714 [Passed]`);
+
+              ChangeDir(res)
+                .then(() => {
+                  spinner.color = 'yellow';
+                  spinner.text = 'please wait a moment.. ';
+
+                  setTimeout(() => {
+                    spinner.color = 'green';
+                    spinner.text = 'almost finished ';
+                    console.log('\n');
+                    spinner.succeed('Finished');
+
+                    Warning('\ncurrent : ' + pwd().stdout);
+                    Log(`Directory ${res} \u2714 [Passed]`);
+                  }, 2000);
+                })
+                .catch((err) => {
+                  spinner.fail('Failure');
+                  ErrSys(err);
+                });
+            }, 2000);
+          })
+
+          .catch((err) => {
+            ErrSys(err);
+          });
+      },
+    },
+  ]);
+  RunTask.run()
+    .then(() => {
+      spinner.start();
+    })
+    .catch(() => spinner.stop());
 }
 export { Build, GitCheck };

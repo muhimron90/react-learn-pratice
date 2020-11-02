@@ -25,6 +25,11 @@
     "declaration": false,
     "baseUrl": "."
   },
-  "exclude": ["node_modules"],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority"
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts", "cli.ts"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "muhi-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Command Line Repo react-learn-practice ",
   "main": "dist/cli.js",
   "bin": {
@@ -22,8 +22,9 @@
   },
   "scripts": {
     "start": "node dist/cli.js",
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node cli.ts",
     "build": "tsc --build tsconfig.json",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -35,10 +36,13 @@
     "axios": "^0.21.0",
     "chalk": "^4.1.0",
     "inquirer": "^7.3.3",
+    "listr": "^0.14.3",
+    "ora": "^5.1.0",
     "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "@types/inquirer": "^7.3.1",
+    "@types/listr": "^0.14.2",
     "@types/node": "^14.14.5",
     "@types/shelljs": "^0.8.8",
     "ts-node": "^9.0.0",
