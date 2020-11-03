@@ -26,4 +26,4 @@ npm i -g muhi-cli || npx muhi-cli
 
 ###### Prompt :
 
-![muhi-cli](muhi-cli/assets/cli.jpg)
+![muhi-cli](muhi-cli/assets/preview.jpg)
