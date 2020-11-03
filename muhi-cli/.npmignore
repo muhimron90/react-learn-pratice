@@ -1,6 +1,10 @@
 node_modules/
 catata.txt
-src/
+src/**/*
 assets/
 FolderTemp/
 tsconfig.json
+stashme/
+cli.ts
+
+

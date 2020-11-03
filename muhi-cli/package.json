@@ -1,62 +1,79 @@
 {
-  "name": "muhi-cli",
-  "version": "1.0.2",
-  "description": "Command Line Repo react-learn-practice ",
-  "main": "dist/cli.js",
-  "bin": {
-    "muhi-cli": "dist/cli.js"
-  },
-  "files": [
-    "dist/",
-    "LICENSE",
-    "README.MD"
-  ],
-  "type": "commonjs",
-  "exports": {
-    ".": "./dist/cli.js",
-    "./package": "./package.json",
-    "./package.json": "./package.json"
-  },
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "start": "node dist/cli.js",
-    "dev": "ts-node cli.ts",
-    "build": "tsc --build tsconfig.json",
-    "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "muhi-cli"
-  ],
-  "author": "Muhamad Imron",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.21.0",
-    "chalk": "^4.1.0",
-    "inquirer": "^7.3.3",
-    "listr": "^0.14.3",
-    "ora": "^5.1.0",
-    "shelljs": "^0.8.4"
-  },
-  "devDependencies": {
-    "@types/inquirer": "^7.3.1",
-    "@types/listr": "^0.14.2",
-    "@types/node": "^14.14.5",
-    "@types/shelljs": "^0.8.8",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/muhimron90/react-learn-pratice.git"
-  },
-  "bugs": {
-    "url": "https://github.com/muhimron90/react-learn-pratice/issues"
-  },
-  "homepage": "https://github.com/muhimron90/react-learn-pratice.git",
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "muhi-cli",
+	"version": "1.0.2",
+	"description": "Command Line Repo react-learn-practice ",
+	"main": "bin/cli.js",
+	"bin": {
+		"muhi-cli": "bin/cli.js"
+	},
+	"files": [
+		"bin/",
+		"LICENSE",
+		"README.MD"
+	],
+	"type": "commonjs",
+	"engines": {
+		"node": ">=10"
+	},
+	"scripts": {
+		"start": "node bin/cli.js",
+		"dev": "ts-node cli.ts",
+		"temp:preinstall": "cp package.json bin/",
+		"build": "rm -rf bin && tsc --build tsconfig.json",
+		"watch": "tsc --watch",
+		"path": "ts-node stashme/minifyBuild.ts ",
+		"lint": "pretty-quick --staged && lint-staged"
+	},
+	"keywords": [
+		"muhi-cli"
+	],
+	"author": "Muhamad Imron",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^0.21.0",
+		"chalk": "^4.1.0",
+		"inquirer": "^7.3.3",
+		"listr": "^0.14.3",
+		"ora": "^5.1.0",
+		"shelljs": "^0.8.4",
+		"terser": "^5.3.8"
+	},
+	"devDependencies": {
+		"@types/inquirer": "^7.3.1",
+		"@types/listr": "^0.14.2",
+		"@types/node": "^14.14.5",
+		"@types/shelljs": "^0.8.8",
+		"@typescript-eslint/eslint-plugin": "^4.6.1",
+		"@typescript-eslint/parser": "^4.6.1",
+		"eslint": "^7.12.1",
+		"eslint-config-airbnb-base": "^14.2.0",
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-prettier": "^3.1.4",
+		"husky": "^4.3.0",
+		"lint-staged": "^10.5.1",
+		"prettier": "^2.1.2",
+		"pretty-quick": "^3.1.0",
+		"ts-node": "^9.0.0",
+		"typescript": "^4.0.5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/muhimron90/react-learn-pratice.git"
+	},
+	"bugs": {
+		"url": "https://github.com/muhimron90/react-learn-pratice/issues"
+	},
+	"homepage": "https://github.com/muhimron90/react-learn-pratice.git",
+	"publishConfig": {
+		"access": "public"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint"
+		}
+	},
+	"lint-staged": {
+		"*.{ts}": "eslint  --cache --fix"
+	}
 }
