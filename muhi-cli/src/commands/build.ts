@@ -3,7 +3,7 @@ import listr from 'listr';
 import { ErrSys, Log, Warning } from '../Color';
 import { ChangeDir, MakeDir } from './dir-tasks';
 import { spinner } from '../internals/spinner';
-import { GitInit } from './git-tasks';
+import { checkout, gitConfig, GitInit, gitRemote, pullData } from './git-tasks';
 import { dirExists } from '../util/directory';
 
 function GitCheck() {
@@ -19,9 +19,21 @@ function GitCheck() {
 	}
 }
 
-// function wait(seconds: number) {
-//   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+// function Confirmation() {
+// 	spinner.warn('Ooops, initialization task is working well..');
+// 	inquirer.prompt(isConfirm()).then((answer) => {
+// 		if (!answer) {
+// 			Info('Cancelled');
+// 			process.exit();
+// 		} else {
+// 			gitRemote();
+// 		}
+// 		console.log(answer);
+
+// 		//
+// 	});
 // }
+
 async function Build(nameDir: string) {
 	const gitInit = dirExists('.git') ? true : false;
 	const dirInit = dirExists(nameDir) ? true : false;
@@ -80,13 +92,37 @@ async function Build(nameDir: string) {
 							spinner.warn('.git was found');
 						}, 500);
 					}
-
-					setTimeout(() => {
-						spinner.warn(
-							'Ooops, initialization task is working well..',
-						);
-					}, 3000);
 				}
+			},
+		},
+		{
+			title: 'Trying Remote Git',
+			skip: () => false,
+			task: () => {
+				setTimeout(() => {
+					gitRemote();
+				}, 2000);
+			},
+		},
+		{
+			title: 'Git Config',
+			task: () => {
+				setTimeout(() => {
+					gitConfig();
+					setTimeout(() => {
+						checkout(nameDir);
+					}, 100);
+				}, 3000);
+			},
+		},
+		{
+			title: 'Pulling Data',
+			task: () => {
+				spinner.start();
+				setTimeout(() => {
+					pullData();
+					spinner.stop();
+				}, 5500);
 			},
 		},
 	]);
