@@ -35,15 +35,16 @@ function GitCheck() {
 // }
 
 async function Build(nameDir: string) {
+	const newDir = nameDir;
 	const gitInit = dirExists('.git') ? true : false;
-	const dirInit = dirExists(nameDir) ? true : false;
+	const dirInit = dirExists(newDir) ? true : false;
 
 	const RunTask = new listr([
 		{
 			title: 'initialize Directory',
 			skip: () => dirInit,
 			task: async () => {
-				await MakeDir(nameDir)
+				await MakeDir(newDir)
 					.then((res) => {
 						setTimeout(() => {
 							ChangeDir(res)
@@ -81,7 +82,7 @@ async function Build(nameDir: string) {
 			skip: () => gitInit, //kater check git in directory 1st
 			task: () => {
 				if (dirInit) {
-					ChangeDir(nameDir);
+					ChangeDir(newDir);
 					if (!gitInit) {
 						setTimeout(() => {
 							GitInit();
@@ -108,21 +109,19 @@ async function Build(nameDir: string) {
 			title: 'Git Config',
 			task: () => {
 				setTimeout(() => {
-					gitConfig();
-					setTimeout(() => {
+					gitConfig().then(() => {
 						checkout(nameDir);
-					}, 100);
+					});
 				}, 3000);
 			},
 		},
+
 		{
 			title: 'Pulling Data',
 			task: () => {
-				spinner.start();
 				setTimeout(() => {
 					pullData();
-					spinner.stop();
-				}, 5500);
+				}, 6500);
 			},
 		},
 	]);

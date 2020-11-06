@@ -1,6 +1,6 @@
 import { echo, exec } from 'shelljs';
 function GitInit() {
-	exec('git init --quiet', (data) => {
+	exec('git init', (data) => {
 		echo('Initial Git :' + data);
 	});
 }
@@ -13,22 +13,28 @@ function gitRemote() {
 		},
 	);
 }
-function gitConfig() {
-	exec('git config core.sparseCheckout true', { async: true }, (data) => {
-		echo('Config Status :' + data);
-	});
+async function gitConfig() {
+	try {
+		exec('git config core.sparseCheckout true', { async: true }, (data) => {
+			echo('Config Status :' + data);
+		});
+	} catch (error) {
+		echo(error);
+	}
 }
+
 function checkout(nameFolder: string) {
 	exec(
 		`echo "${nameFolder}/* " >> .git/info/sparse-checkout`,
 		{ async: true },
 		(data) => {
-			echo('Status :' + data);
+			echo('Status :' + data + nameFolder);
 		},
 	);
 }
+
 function pullData() {
-	exec('git pull --depth=1 origin main', (data) => {
+	exec('git pull --depth=1 origin main', { async: true }, (data) => {
 		echo('Get repo directory :' + data);
 	});
 }

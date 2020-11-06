@@ -1,6 +1,6 @@
 {
 	"name": "muhi-cli",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Command Line Repo react-learn-practice ",
 	"main": "bin/cli.js",
 	"bin": {

@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+:root {
+  --font-inter: "Inter", sans-serif;
+  --bg-content-1: #dfe6e9;
+  --bg-content-2: #b2bec3;
+  --pad-right: 5px;
+}
+#container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 1.5fr 1.2fr 0.8fr;
+  grid-template-areas: "nav nav nav nav" "sidebar main main main" "sidebar content1 content2 content3" "sidebar footer footer footer";
+  row-gap: 0.3em; /* can use px,em,percent,vmint,cm */
+  column-gap: 0.3em;
+  font-size: 16px;
+}
+
+nav {
+  grid-area: nav;
+
+  background-color: #0984e3;
+  font-family: "Times New Roman", Times, serif;
+}
+main {
+  grid-area: main;
+  background-color: #81ecec;
+}
+.sidebar {
+  grid-area: sidebar;
+  background-color: #74b9ff;
+}
+
+.content__1 {
+  grid-area: content1;
+  font-family: var(--font-inter);
+  font-size: 1fr;
+  background-color: var(--bg-content-1);
+}
+.content__2 {
+  grid-area: content2;
+  font-family: var(--font-inter);
+  font-size: 1fr;
+  background-color: var(--bg-content-2);
+}
+.content__3 {
+  grid-area: content3;
+  font-family: var(--font-inter);
+  font-size: 1fr;
+  background-color: var(--bg-content-1);
+}
+footer {
+  grid-area: footer;
+  background-color: #00b894;
+}
+@media only screen and (max-width: 480px) {
+  #container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
+    grid-template-areas: "nav" "sidebar" "main" "content1" "content2" "content3" "footer";
+    text-align: center;
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  #container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.2fr 1fr 0.6fr 0.6fr 0.6fr 0.5fr;
+    grid-template-areas: "nav" "sidebar" "main" "content1" "content2" "content3" "footer";
+    text-align: center;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,19 @@
+.parent__card {
+  margin: 0;
+  padding: 5px;
+  background-color: beige;
+}
+.parent__card > h1,
+.child__card {
+  margin: 10px;
+  padding: 5px;
+}
+.child__card {
+  background-color: white;
+}
+
+.child__card > h2,
+p {
+  margin: 4px;
+  font-size: 80%;
+}
