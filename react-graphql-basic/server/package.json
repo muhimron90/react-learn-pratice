@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "nodemon dist/index.js",
-    "build": "babel src -d dist",
+    "build": "yarn clean && babel src -d dist",
     "serve": "yarn build && node dist/index.js",
     "babel-node": "nodemon --exec babel-node src/index.js",
     "clean": "rimraf dist/",

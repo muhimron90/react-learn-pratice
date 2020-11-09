@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Form from '../../components/Form';
-
-
-const GETAUTHORS = gql`
-  query {
-    listAuthors {
-      name
-    id
-    }
-  }
-`;
+import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import Form from "../../components/Form";
+import { ADDBOOK, FETCHBOOK, GETAUTHORS } from "../../queries";
 
 const FindAuthor = () => {
-  const { loading, error, data } = useQuery(GETAUTHORS);
-  const [authors, setAuthors] = useState([]);
+  const { loading: queryLoading, error: queryError, data } = useQuery(
+    GETAUTHORS
+  );
+
+  const [state, setState] = useState({
+    name: "",
+    genre: "",
+    authorId: "",
+  });
+  const [
+    addData,
+    { loading: mutationLoading, error: mutationError },
+  ] = useMutation(ADDBOOK, {
+    onCompleted: (data) => {
+      resetInput(data);
+    },
+    onError: (error) => console.error("Error creating a post", error),
+  });
 
   function ErrorHandle() {
-     return (
+    return (
       <>
-        <p>Error</p>
+        <p>Error </p>
       </>
     );
   }
@@ -30,49 +37,93 @@ const FindAuthor = () => {
       </>
     );
   }
-   const FetchData = () => {
-     
-  
-     return data.listAuthors.map((item, index) => {
-       return (
-         <option key={index} value={item.id}>
-           {item.name}
-         </option>
-       );
-     });
-   };
+  const FetchData = () => {
+    return data.listAuthors.map((item, index) => {
+      return (
+        <option key={index} value={item.id}>
+          {item.name}
+        </option>
+      );
+    });
+  };
 
-  function handleOpt(e) {
-    console.log();
-    
-    setAuthors();
+  function resetInput(message) {
+    console.error("Data from mutation", message);
+    setState({ name: "", genre: "", authorId: "" });
+  }
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    addData({
+      variables: {
+        name: state.name,
+        genre: state.genre,
+        authorId: state.authorId,
+      },
+      //call Booklist Query after sukses mutation
+      refetchQueries: [{ query: FETCHBOOK }],
+    });
+
+    console.log(state);
   };
 
   return (
     <div>
-      {loading ? (
+      {queryLoading || mutationLoading ? (
         Loading()
-      ) : error ? (
+      ) : queryError || mutationError ? (
         ErrorHandle()
       ) : (
-        <Form>
-          <div className='field'>
-            <label>Name: </label>
-            <input type='text' name='' id='' />
-          </div>
-          <div className='field'>
-            <label>Genre: </label>
-            <input type='text' name='' id='' />
-          </div>
-          <div className='field'>
-            <label>Author: </label>
-            <select>{FetchData()}</select>
-          </div>
-          <button className='add__book'>Add</button>
+        <Form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              className="field"
+              type="text"
+              name="name"
+              onChange={handleChange}
+              placeholder="Book Name"
+              required
+            />
+          </label>
+
+          <label>
+            Genre:
+            <input
+              className="field"
+              type="text"
+              name="genre"
+              onChange={handleChange}
+              placeholder="Book Genre"
+              required
+            />
+          </label>
+
+          <label>
+            Author:
+            <select
+              name="authorId"
+              onChange={handleChange}
+              className="field"
+              required
+            >
+              <option value="">Select Authors</option>
+              {FetchData()}
+            </select>
+          </label>
+          <button className="btn__add" type="submit">
+            Add
+          </button>
         </Form>
       )}
     </div>
   );
-}
+};
 
 export default FindAuthor;

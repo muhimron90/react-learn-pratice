@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const Form = ({ children , ...rest }) => {
+const Form = ({ children, onSubmit, ...rest }) => {
   return (
     <>
-      <form {...rest} className='form__style'>
+      <form {...rest} onSubmit={onSubmit} className="form__style">
+        <div className="form__head">Add Books</div>
         {children}
       </form>
     </>

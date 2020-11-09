@@ -1,0 +1,97 @@
+return (
+  <div>
+    {loading ? (
+      Loading()
+    ) : error ? (
+      ErrorHandle()
+    ) : (
+      <div className='book__details'>
+        <p>Detail book</p>
+        <p>{props.bookId}</p>
+        {data.book.map((item, index) => {
+          return (
+            <div key={index}>
+              <h2>{item.name}</h2>
+              <p>{item.genre}</p>
+              <p>{item.author.name}</p>
+              <p>{item.author.age}</p>
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
+);
+
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { DETAILBOOKS } from '../../queries';
+
+const DetailBooks = ({ bookId }) => {
+  const { loading, error, data } = useQuery(DETAILBOOKS, {
+    variables: {
+      id: '5fa8281ee6d3ac22ccba2c14',
+    },
+  });
+
+  const displayBook = () => {
+    if (bookId !== null || '' || undefined) {
+      return data.book.map((item, index) => {
+        return (
+          <>
+            <div key={index}>
+              <h2>{item.name}</h2>
+              <p>{item.genre}</p>
+              <p>{item.author.name}</p>
+              <p>{item.author.age}</p>
+            </div>
+          </>
+        );
+      });
+    }
+  };
+
+  const FetchData = () => {
+    if (loading) return <p>Loading data...</p>;
+    if (error) return <p>Error Query data : </p>;
+
+    return data.listBooks.map((item, index) => {
+      return (
+        <li key={index} onClick={() => setSelected(item.id)}>
+          Name Book : {item.name}
+        </li>
+      );
+    });
+  };
+
+  function ErrorHandle() {
+    return (
+      <>
+        <p>Error </p>
+      </>
+    );
+  }
+  function Loading() {
+    return (
+      <>
+        <p>Loading data...</p>
+      </>
+    );
+  }
+  return (
+    <>
+      {loading ? (
+        Loading()
+      ) : error ? (
+        ErrorHandle()
+      ) : (
+        <div className='book__details'>
+          <p>Detail book</p>
+          {displayBook}
+        </div>
+      )}
+    </>
+  );
+};
+
+export default DetailBooks;
